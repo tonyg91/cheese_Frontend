@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Index(props) {
+const Index = (props) => {
   // state to hold formData
   const [newForm, setNewForm] = useState({
     name: "",
@@ -9,15 +9,20 @@ function Index(props) {
     image: "",
   });
 
-  // handleChange function for form
+  // Handle Change Function to sync input with state
   const handleChange = (event) => {
-    setNewForm({ ...newForm, [event.target.name]: event.target.value });
-  };
+    //make a copy of state
+    const newState = {...newForm}
+    // update the newState
+    newState[event.target.name] = event.target.value
+    // update the state 
+    setNewForm(newState)
+}
 
   // handle submit function for form
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.createCheese(newForm);
+    props.createCheese(newForm)
     setNewForm({
       name: "",
       countryOfOrigin: "",
@@ -25,9 +30,37 @@ function Index(props) {
     });
   };
 
-  // loaded function
-  const loaded = () => {
-    return props.cheese.map((cheese) => (
+  const form = <form onSubmit={handleSubmit}>
+  <input 
+  type="text" 
+  value={newForm.name}
+  name="name" 
+  placeholder="name" 
+  onChange={handleChange}
+  />
+   <input
+  type="text"
+  value={newForm.countryOfOrigin}
+  name="countryOfOrigin"
+  placeholder="Country Of Origin"
+  onChange={handleChange}
+  />
+  <input
+  type="text"
+  value={newForm.image}
+  name="image"
+  placeholder="Image URL"
+  onChange={handleChange}
+  />
+  <input type="submit" value="Create Cheese" />
+  </form>
+
+if (props.cheese) {
+return (
+<section>
+  {form}
+  {props.cheese.map((cheese) => {
+    return (
       <div key={cheese._id} className="cheese">
         <Link to={`/cheese/${cheese._id}`}>
           <h1>{cheese.name}</h1>
@@ -35,41 +68,18 @@ function Index(props) {
         <h3>{cheese.countryOfOrigin}</h3>
         <img src={cheese.image} alt={cheese.name} />
       </div>
-    ));
-  };
-
-  const loading = () => {
-    return <h1>Loading...</h1>;
-  };
-  return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newForm.name}
-          name="name"
-          placeholder="name"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={newForm.countryOfOrigin}
-          name="countryOfOrigin"
-          placeholder="Country Of Origin"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          value={newForm.image}
-          name="image"
-          placeholder="image URL"
-          onChange={handleChange}
-        />
-        <input type="submit" value="Create Cheese" />
-      </form>
-      {props.cheese ? loaded() : loading()}
-    </section>
-  );
+    );
+  })}
+</section>
+);
+} else {
+return (
+<section>
+  {form}
+  <h1>Loading...</h1>
+</section>
+);
 }
+};
 
 export default Index;

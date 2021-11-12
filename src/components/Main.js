@@ -3,29 +3,29 @@ import {Route, Routes} from "react-router-dom"
 import Index from "../pages/Index"
 import Show from "../pages/Show"
 
-function Main(props) {
-  const [cheese, setCheese] = useState(null);
+const Main = (props) => {
+  const [cheese, setCheese] = useState(null)
 
-  const URL = "https://ag-cheese-backend.herokuapp.com/cheese/";
+  const URL = "https://ag-cheese-backend.herokuapp.com/cheese/"
 
   const getCheese = async () => {
-    const response = await fetch(URL);
-    const data = await response.json();
-    setCheese(data);
+    const response = await fetch(URL)
+    const data = await response.json()
+    setCheese(data)
   };
 
   const createCheese = async (cheese) => {
-    // make post request to create cheese
+    // make post request to create cheese inside of a object
     await fetch(URL, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(cheese),
-    });
+    })
     // update list of cheese
-    getCheese();
-  };
+    getCheese()
+  }
 
   const updateCheese = async (cheese, id) => {
     // make post request to create cheese
@@ -35,21 +35,21 @@ function Main(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(cheese),
-    });
+    })
     // update list of cheese
-    getCheese();
-  };
+    getCheese()
+  }
 
   const deleteCheese = async (id) => {
     // make post request to create cheese
     await fetch(URL + id, {
       method: "delete",
-    });
+    })
     // update list of cheese
-    getCheese();
-  };
-
-  useEffect(() => getCheese(), []);
+    getCheese()
+  }
+  // useEffect to make a call to getPeople when page loads
+  useEffect(() => {getCheese()}, [])
 
 
     return (
