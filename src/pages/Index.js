@@ -52,7 +52,7 @@ const Index = (props) => {
   placeholder="Image URL"
   onChange={handleChange}
   />
-  <input type="submit" value="Create Cheese" />
+  <input type="submit" value="Create Cheese" className="create"/>
   </form>
 
 if (props.cheese) {

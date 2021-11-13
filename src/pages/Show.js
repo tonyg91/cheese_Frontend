@@ -59,7 +59,7 @@ const Show = (props) => {
     placeholder="image URL"
     onChange={handleChange}
   />
-  <input type="submit" value="Update Cheese" />
+  <input type="submit" value="Update Cheese" className="update"/>
 </form>
 
 return (

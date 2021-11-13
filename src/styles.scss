@@ -1,15 +1,15 @@
 // --------------------------
 // VARIABLES
 // --------------------------
-$maincolor: rgb(255, 187, 0);
+$maincolor: white;
 $contrastcolor: black;
 
-@mixin white-text-orange-bg {
+@mixin black-text-white-bg {
   color: $contrastcolor;
   background-color: $maincolor;
 }
 
-@mixin black-text-white-bg {
+@mixin white-text-black-bg {
   color: $maincolor;
   background-color: $contrastcolor;
 }
@@ -19,15 +19,85 @@ $contrastcolor: black;
 // --------------------------
 
 nav {
-  @include white-text-orange-bg;
+  @include black-text-white-bg;
   display: flex;
   justify-content: flex-start;
 
   a {
-    @include white-text-orange-bg;
+    @include black-text-white-bg;
     div {
       margin: 10px;
-      font-size: large;
+      font-size: x-large;
     }
   }
+}
+
+// --------------------------
+// Form
+// --------------------------
+
+section,
+div {
+  form {
+    input {
+      @include black-text-white-bg;
+      padding: 10px;
+      font-size: 1.1em;
+      margin: 10px;
+
+      &[type="submit"]:hover {
+        @include black-text-white-bg;
+      }
+    }
+  }
+}
+
+// --------------------------
+// button
+// --------------------------
+
+button#delete {
+  @include white-text-black-bg;
+  display: block;
+  margin: auto;
+  font-size: 1.3em;
+  padding: 10px;
+  border-radius: 50px;
+}
+
+.update{
+  @include white-text-black-bg;
+  display: inline;
+  margin: auto;
+  font-size: 1.3em;
+  padding: 10px;
+  border-radius: 50px;
+}
+
+.create{
+  @include white-text-black-bg;
+  display: inline;
+  margin: auto;
+  font-size: 1.3em;
+  padding: 10px;
+  border-radius: 50px;
+}
+// --------------------------
+// images
+// --------------------------
+
+img {
+  width: 300px;
+  height: 300px;
+  border-radius: 90px;
+  object-fit: cover;
+}
+body{
+  background-image: url("https://img.freepik.com/free-photo/cheese-creamy-liquid-drips-cheese-melt-yellow-background-3d-rendering_307211-87.jpg?size=626&ext=jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  text-align: center;
+  font-family: monospace;
 }
